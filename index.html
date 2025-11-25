@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendapê Academy: Comunicação Estratégica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        :root {
+            --bg-dark: #0f0518;
+            --bg-card: #1e1b4b;
+            --primary: #a855f7; /* Purple 500 */
+            --primary-glow: #d8b4fe; /* Purple 300 */
+            --accent: #f43f5e; /* Rose for warnings */
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, #e9d5ff, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 5, 24, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-glow);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* Imagem Hero: Auditório/Palco escuro */
+            background: linear-gradient(rgba(15, 5, 24, 0.7), var(--bg-dark)), url('https://images.unsplash.com/photo-1475721027767-4d563518e5e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--primary-glow);
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        /* --- RULE 55-38-7 --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .percentage {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* --- TWO COLUMN LAYOUT (Hands/Posture) --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-box h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-glow);
+        }
+
+        .detail-list {
+            list-style: none;
+        }
+
+        .detail-list li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .detail-list strong {
+            color: #fff;
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .image-frame {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            position: relative;
+            height: 400px; /* Altura fixa para alinhar melhor */
+        }
+
+        .image-frame img {
+            transition: transform 0.5s;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- MIRRORING --- */
+        .mirror-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .mirror-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+
+        .mirror-icon {
+            font-size: 3rem;
+            color: var(--primary-glow);
+            margin-bottom: 20px;
+        }
+
+        /* --- PSYCHOLOGY & QUOTE --- */
+        .parallax-quote {
+            /* Imagem Parallax: Mente/Abstrata */
+            background: linear-gradient(rgba(15, 5, 24, 0.85), rgba(15, 5, 24, 0.85)), url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            padding: 100px 0;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .parallax-quote blockquote {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', serif;
+            color: #fff;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pillars {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pillar-badge {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--primary);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--primary-glow);
+        }
+
+        /* --- FORBIDDEN WORDS --- */
+        .danger-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .danger-card {
+            background: rgba(244, 63, 94, 0.1);
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .danger-word {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            text-decoration: line-through;
+        }
+
+        .better-word {
+            color: #fff;
+            font-style: italic;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #000;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+            margin-top: 60px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .mirror-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified for demo */
+            .image-frame { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">RENDAPÊ<span style="color: var(--primary)">.ACADEMY</span></div>
+                <ul class="nav-links">
+                    <li><a href="#regra">A Regra</a></li>
+                    <li><a href="#nao-verbal">Não-Verbal</a></li>
+                    <li><a href="#voz">Voz</a></li>
+                    <li><a href="#psicologia">Psicologia</a></li>
+                    <li><a href="#vicios">Vícios</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h3 style="letter-spacing: 5px; color: var(--primary); margin-bottom: 15px;">RENDAPÊ ACADEMY</h3>
+            <h1>Comunicação de<br><span class="text-gradient">Alto Impacto</span></h1>
+            <p>Domine a arte da influência. A autoridade não está apenas no que você fala, mas em como você é percebido.</p>
+            <a href="#regra" class="btn">Começar Jornada</a>
+        </div>
+    </section>
+
+    <!-- THE RULE 55-38-7 -->
+    <section id="regra" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">A Regra de Ouro (Mehrabian)</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="percentage">55%</span>
+                    <h3>Não Verbal</h3>
+                    <p class="text-muted">Postura, Gestos, Expressão Facial</p>
+                </div>
+                <div class="stat-card">
+                    <span class="percentage">38%</span>
+                    <h3>Vocal</h3>
+                    <p class="text-muted">Tom de voz, Ritmo, Timbre</p>
+                </div>
+                <div class="stat-card">
+                    <span class="percentage">7%</span>
+                    <h3>Conteúdo</h3>
+                    <p class="text-muted">As palavras propriamente ditas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NON VERBAL: HANDS -->
+    <section id="nao-verbal" class="section-padding" style="background: var(--bg-card);">
+        <div class="container">
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3>O Poder das Mãos</h3>
+                    <p style="margin-bottom: 20px;">As mãos são o "metrônomo" da sua fala. Elas ditam o ritmo de como o cérebro da audiência processa sua informação.</p>
+                    <ul class="detail-list">
+                        <li>
+                            <strong>Velocidade</strong>
+                            Rápida indica dinamismo e energia, mas em excesso revela ansiedade. Lenta marca ênfase, controle e deliberação.
+                        </li>
+                        <li>
+                            <strong>Dimensão & Firmeza</strong>
+                            Gestos amplos projetam autoridade e abertura. Mãos firmes demonstram convicção. Evite mãos "moles" ou escondidas nos bolsos.
+                        </li>
+                    </ul>
+                </div>
+                <div class="image-frame">
+                    <!-- Imagem: Mãos gesticulando em reunião -->
+                    <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Palestrante gesticulando com as mãos" onerror="this.src='https://placehold.co/800x600?text=Gestos+e+Mãos'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NON VERBAL: POSTURE -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="grid-2">
+                <div class="image-frame">
+                    <!-- Imagem: Postura executiva confiante -->
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Postura confiante de negócios" onerror="this.src='https://placehold.co/800x600?text=Postura+Confiante'">
+                </div>
+                <div class="content-box">
+                    <h3>Postura de Comando</h3>
+                    <p style="margin-bottom: 20px;">O corpo fala antes da voz. Uma postura correta altera bioquimicamente seu cérebro e a percepção da audiência.</p>
+                    <ul class="detail-list">
+                        <li>
+                            <strong>Cabeça & Olhar</strong>
+                            Queixo paralelo ao chão. Olhar altivo mas acolhedor. Não olhe para o chão enquanto fala.
+                        </li>
+                        <li>
+                            <strong>Tronco Aberto</strong>
+                            Ombros relaxados e para trás. Ocupar espaço com os cotovelos levemente afastados do corpo demonstra segurança.
+                        </li>
+                        <li>
+                            <strong>Base Sólida</strong>
+                            Pés na largura do quadril. Evite balançar. O chão é sua base de poder pessoal.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MIRRORING -->
+    <section class="section-padding" style="background: #150a24;">
+        <div class="container">
+            <h2 class="section-title">Leitura e Espelhamento</h2>
+            <p style="text-align: center; max-width: 700px; margin: -40px auto 40px; color: var(--text-muted);">Adapte sua comunicação conforme o perfil do interlocutor.</p>
+            <div class="mirror-grid">
+                <div class="mirror-card">
+                    <div class="mirror-icon"><i class="fa-solid fa-eye"></i></div>
+                    <h3>Visual</h3>
+                    <p>Tende a olhar para cima. Fala rápida e respiração alta. Pensa em imagens.</p>
+                </div>
+                <div class="mirror-card">
+                    <div class="mirror-icon"><i class="fa-solid fa-ear-listen"></i></div>
+                    <h3>Auditivo</h3>
+                    <p>Olhar na linha do horizonte. Fala ritmada e tom médio. Foca nas palavras e sons.</p>
+                </div>
+                <div class="mirror-card">
+                    <div class="mirror-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                    <h3>Cinestésico</h3>
+                    <p>Olha para baixo. Fala mais lenta e pausada. Conecta-se com sentimentos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VOICE -->
+    <section id="voz" class="section-padding">
+        <div class="container">
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3>Técnicas de Voz & Autoridade</h3>
+                    <p style="margin-bottom: 20px;">Se eu não tenho poder pessoal na voz, onde vou chegar? A autoridade não está no cargo, mas na ressonância.</p>
+                    <ul class="detail-list">
+                        <li>
+                            <strong>O Shaker</strong>
+                            Dispositivo ou técnica que gera vibração, soltando o muco e relaxando a musculatura laríngea para uma voz mais limpa.
+                        </li>
+                        <li>
+                            <strong>O Canudo (Lax Vox)</strong>
+                            Fonar em um canudo dentro da água. A contrapressão ajusta as pregas vocais, melhora o fechamento glótico e aumenta a projeção sem esforço.
+                        </li>
+                    </ul>
+                </div>
+                <div class="image-frame">
+                    <!-- Imagem: Microfone de podcast/estúdio -->
+                    <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Microfone profissional" onerror="this.src='https://placehold.co/800x600?text=Técnica+Vocal'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PSYCHOLOGY PARALLAX -->
+    <section id="psicologia" class="parallax-quote">
+        <div class="container">
+            <blockquote>"A comunicação começa entendendo os próprios limites."</blockquote>
+            <div class="pillars">
+                <div class="pillar-badge">1. Desbloquear Medos</div>
+                <div class="pillar-badge">2. Perceber Limitações</div>
+                <div class="pillar-badge">3. Querer Transformar</div>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.2rem;">O medo de falar em público nunca acaba. O segredo é como você o controla.</p>
+        </div>
+    </section>
+
+    <!-- FORBIDDEN WORDS -->
+    <section id="vicios" class="section-padding" style="background: var(--bg-card);">
+        <div class="container">
+            <h2 class="section-title">Palavras Proibidas</h2>
+            <p style="text-align: center; margin-bottom: 40px;">Elimine estes vícios que minam sua autoridade imediatamente.</p>
+            <div class="danger-grid">
+                <div class="danger-card">
+                    <span class="danger-word">"Eu acho..."</span>
+                    <span class="better-word">Troque por: "Eu acredito", "Minha análise mostra".</span>
+                </div>
+                <div class="danger-card">
+                    <span class="danger-word">"Talvez / Quem sabe"</span>
+                    <span class="better-word">Troque por: "Vou verificar e te retorno".</span>
+                </div>
+                <div class="danger-card">
+                    <span class="danger-word">"Desculpa..." (Sem motivo)</span>
+                    <span class="better-word">Troque por: "Obrigado pela paciência".</span>
+                </div>
+                <div class="danger-card">
+                    <span class="danger-word">"Rapidinho / Minutinho"</span>
+                    <span class="better-word">Evite diminutivos. Eles diminuem sua importância.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">RENDAPÊ ACADEMY</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2024 Rendapê Academy. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
